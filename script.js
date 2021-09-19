@@ -81,6 +81,8 @@ class Ellipse {
     fill(this.color)
    ellipse(this.x, this.y, this.w, this.h);
 
+   this.x = this.x + this.vx;
+
   }
 }
 
