@@ -66,37 +66,96 @@
 
 
 
-class Ellipse {
-  constructor(x, y, w, h, vx, vy, color) {
-      this.x = x;
-      this.y = y;
-      this.w = w;
-      this.h = h;
-      this.vx = vx;
-      this.vy = vy
-      this.color = color
+// class Ellipse {
+//   constructor(x, y, w, h, vx, vy, color) {
+//       this.x = x;
+//       this.y = y;
+//       this.w = w;
+//       this.h = h;
+//       this.vx = vx;
+//       this.vy = vy
+//       this.color = color
+//   }
+
+//   drawEllipse(){
+//     fill(this.color)
+//    ellipse(this.x, this.y, this.w, this.h);
+
+//    this.x = this.x + this.vx;
+
+//   }
+// }
+
+// function setup(){
+//   createCanvas(300, 300);
+
+//   ball1 = new Ellipse(60,10,30,30,5,5,"white");
+
+// }
+
+// function draw(){
+//   background(225);
+
+//   ball1.drawEllipse();
+
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var yVal; 
+var accel; 
+var velocity; 
+var mass; 
+
+
+function setup() {
+  createCanvas(640, 360);
+  
+  yVal = 0;  
+  velocity = 0; 
+  mass = 50; 
+  
+  accel = mass * 0.1; 
+}
+
+function draw() {
+  background(127);
+  fill(255,0,0);
+  
+  velocity += accel; 
+  yVal += velocity;
+	ellipse(width/2,yVal, mass,mass); 
+  
+  if (yVal > height - mass/2) {
+    // A little dampening when hitting the bottom
+    velocity *= -0.6;
+    yVal = height - mass/2;
   }
-
-  drawEllipse(){
-    fill(this.color)
-   ellipse(this.x, this.y, this.w, this.h);
-
-   this.x = this.x + this.vx;
-
-  }
 }
 
-function setup(){
-  createCanvas(300, 300);
 
-  ball1 = new Ellipse(60,10,30,30,5,5,"white");
-
+function mousePressed() {
+  yVal = 0;  
+  velocity = 0; 
 }
 
-function draw(){
-  background(225);
 
-  ball1.drawEllipse();
 
-}
+
 
