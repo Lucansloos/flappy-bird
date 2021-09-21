@@ -124,6 +124,7 @@ var velocity;
 var mass; 
 
 
+
 function setup() {
   createCanvas(640, 360);
   
@@ -155,7 +156,9 @@ function mousePressed() {
   velocity = 0; 
 }
 
-
-
-
+function keyPressed() {
+  if (keyCode === 32) {
+    print('The value of x is ');
+  }
+}
 
