@@ -186,5 +186,12 @@ function draw() {
   velocity += acceleration;
   y += velocity;
 
+  print(y);
+
+  if (y >= 300) {
+    velocity = 0;
+    acceleration = 0;
+  }
+
   ellipse(640/2, y, 20, 20);
 }
