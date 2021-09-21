@@ -161,6 +161,22 @@
 //   }
 // }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var y;
 var velocity;
 var acceleration;
@@ -182,7 +198,7 @@ function setup() {
 
   acceleration = gravity;
 
-  jumpHeight = 100;
+  jumpHeight = 30;
 }
 
 function draw() {
