@@ -118,47 +118,73 @@
 
 
 
-var yVal; 
-var accel; 
-var velocity; 
-var mass; 
+// var yVal; 
+// var accel; 
+// var velocity; 
+// var mass; 
 
 
+
+// function setup() {
+//   createCanvas(640, 360);
+  
+//   yVal = 0;  
+//   velocity = 0; 
+//   mass = 50; 
+  
+//   accel = mass * 0.1; 
+// }
+
+// function draw() {
+//   background(127);
+//   fill(255,0,0);
+  
+//   velocity += accel; 
+//   yVal += velocity;
+// 	ellipse(width/2,yVal, mass,mass); 
+  
+//   if (yVal >= 300) yVal = 300;
+
+//   if (accel < 0) accel = mass * 0.1;
+// }
+
+
+// function mousePressed() {
+//   yVal = 0;  
+//   velocity = 0; 
+// }
+
+// function keyPressed() {
+//   if (keyCode === 32) {
+
+//     accel = -20;
+//   }
+// }
+
+var y;
+var velocity;
+var acceleration;
+
+var gravity;
 
 function setup() {
   createCanvas(640, 360);
-  
-  yVal = 0;  
-  velocity = 0; 
-  mass = 50; 
-  
-  accel = mass * 0.1; 
+
+  y = 100;
+  velocity = 0;
+  acceleration = 0;
+
+  gravity = 0.9;
+
+  acceleration = gravity;
 }
 
 function draw() {
   background(127);
   fill(255,0,0);
-  
-  velocity += accel; 
-  yVal += velocity;
-	ellipse(width/2,yVal, mass,mass); 
-  
-  if (yVal > height - mass/2) {
-    // A little dampening when hitting the bottom
-    velocity *= -0.6;
-    yVal = height - mass/2;
-  }
+
+  velocity += acceleration;
+  y += velocity;
+
+  ellipse(640/2, y, 20, 20);
 }
-
-
-function mousePressed() {
-  yVal = 0;  
-  velocity = 0; 
-}
-
-function keyPressed() {
-  if (keyCode === 32) {
-    print('The value of x is ');
-  }
-}
-
