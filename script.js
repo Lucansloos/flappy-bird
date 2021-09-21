@@ -167,6 +167,10 @@ var acceleration;
 
 var gravity;
 
+var jumpHeight;
+
+var startJumpHeight;
+
 function setup() {
   createCanvas(640, 360);
 
@@ -177,6 +181,8 @@ function setup() {
   gravity = 0.9;
 
   acceleration = gravity;
+
+  jumpHeight = 100;
 }
 
 function draw() {
@@ -186,12 +192,24 @@ function draw() {
   velocity += acceleration;
   y += velocity;
 
-  print(y);
+  print(y - startJumpHeight);
 
   if (y >= 300) {
     velocity = 0;
     acceleration = 0;
+    y = 300;
   }
-
   ellipse(640/2, y, 20, 20);
+
+  if (y - startJumpHeight <= -jumpHeight) {
+    acceleration = gravity;
+  }
+}
+
+function keyPressed() {
+  if (keyCode === 32) {
+    startJumpHeight = y;
+    acceleration = -1;
+    velocity = -5;
+  }
 }
