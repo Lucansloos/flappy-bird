@@ -22,12 +22,16 @@ class Rect {
   }
 }
 
-var rect1;
+var rects = [];
 
 function setup() {
   createCanvas(640, 360);
 
-  rect1 = new Rect(640, 300, 30, 100, -5, "green");
+  
+  rect1 = new Rect(640, 300, 30, 200, -5, "green");
+  rect2 = new Rect(640, 0, 30, 150, -5, "green");  
+  rects.push(rect1);
+  rects.push(rect2);
 
   y = 100;
   velocity = 0;
@@ -42,6 +46,17 @@ function draw() {
   background(127);
   fill(255, 0, 0);
 
+  if(frameCount % 60 == 0){
+    console.log(frameCount);
+    let newRectBot = new Rect(640, 300, 30, 200, -5, "green");
+    let newRectTop = new Rect(640, 0, 30, 150, -5, "green");  
+    rects.push(newRectBot);
+    rects.push(newRectTop);
+    
+
+//    console.log(rects.length)
+  }
+
   if (y >= 300) {
     y = 300;
 
@@ -55,8 +70,9 @@ function draw() {
   }
 
   ellipse(640 / 2, y, 25, 25);
+ 
+  rects.forEach(r => r.drawRect());
 
-  rect1.drawRect();
 }
 
 function keyPressed() {
@@ -64,6 +80,11 @@ function keyPressed() {
     velocity = -10;
   }
 }
+
+
+
+
+
 
 
 
