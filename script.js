@@ -26,7 +26,7 @@ var rects = [];
 
 function setup() {
   createCanvas(640, 360);
-
+  flappybirdgeel = loadImage('images/flappy bird geel.png');
   
   rect1 = new Rect(640, 300, 30, 200, -5, "green");
   rect2 = new Rect(640, 0, 30, 150, -5, "green");  
@@ -54,7 +54,7 @@ function draw() {
     rects.push(newRectTop);
     
 
-//    console.log(rects.length)
+    //console.log(rects.length)
   }
 
   if (y >= 300) {
@@ -69,7 +69,7 @@ function draw() {
     y += velocity;
   }
 
-  ellipse(640 / 2, y, 25, 25);
+  image(flappybirdgeel, 600 / 2, y, 70, 70);
  
   rects.forEach(r => r.drawRect());
 
