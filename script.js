@@ -16,7 +16,7 @@ class Rect {
 
   drawRect() {
     fill(this.color)
-    rect(this.x, this.y, this.w, this.h); 
+    rect(this.x, this.y, this.w, this.h);
     this.x = this.x + this.vx;
 
   }
@@ -28,10 +28,13 @@ function setup() {
   createCanvas(640, 360);
   flappybirdgeel = loadImage('images/flappy bird geel.png');
   
-  rect1 = new Rect(640, 300, 30, 200, -5, "green");
-  rect2 = new Rect(640, 0, 30, 150, -5, "green");  
+  let randmHeight = random(height / 2);
+
+  rect1 = new Rect(640, 300, 30, randmHeight + 100, -5, "green");
+  rect2 = new Rect(640, 0, 30, randmHeight, -5, "green");
   rects.push(rect1);
   rects.push(rect2);
+
 
   y = 100;
   velocity = 0;
@@ -46,13 +49,14 @@ function draw() {
   background(127);
   fill(255, 0, 0);
 
-  if(frameCount % 60 == 0){
+  if (frameCount % 60 == 0) {
     console.log(frameCount);
-    let newRectBot = new Rect(640, 300, 30, 200, -5, "green");
-    let newRectTop = new Rect(640, 0, 30, 150, -5, "green");  
+     let randmHeight = random(height / 2);
+    let newRectBot = new Rect(640, randmHeight + 100, 30, height - (randmHeight + 100), -5, "green");
+    let newRectTop = new Rect(640, 0, 30, randmHeight, -5, "green");
     rects.push(newRectBot);
     rects.push(newRectTop);
-    
+
 
     //console.log(rects.length)
   }
@@ -69,8 +73,8 @@ function draw() {
     y += velocity;
   }
 
-  image(flappybirdgeel, 600 / 2, y, 70, 70);
- 
+  image(flappybirdgeel, 600 / 2, y, 100, 100);
+
   rects.forEach(r => r.drawRect());
 
 }
@@ -80,9 +84,6 @@ function keyPressed() {
     velocity = -10;
   }
 }
-
-
-
 
 
 
