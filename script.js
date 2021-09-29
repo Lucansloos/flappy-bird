@@ -20,6 +20,16 @@ class Rect {
     this.x = this.x + this.vx;
 
   }
+
+
+  isColliding(){
+    if(600 / 2 + 60 > this.x){
+      return true;
+    }
+    else{
+      return false
+      }
+  }
 }
 
 var rects = [];
@@ -59,6 +69,9 @@ function draw() {
 
 
     //console.log(rects.length)
+    if(rects.length > 6){
+      rects.splice(0,2);
+    }
   }
 
   if (y >= 300) {
@@ -75,15 +88,29 @@ function draw() {
 
   image(flappybirdgeel, 600 / 2, y, 100, 100);
 
-  rects.forEach(r => r.drawRect());
+    rects.forEach((r) => {
+    r.drawRect()
+    if(r.isColliding()){
+      r.color = "red";
+    }
+    else{
+      r.color = "green";
+    }
+  });
 
 }
+
+  rects.forEach(r => r.drawRect());
+
+
 
 function keyPressed() {
   if (keyCode === 32) {
     velocity = -10;
   }
 }
+
+
 
 
 
