@@ -23,7 +23,7 @@ class Rect {
 
 
   isColliding(){
-    if(600 / 2 + 60 > this.x){
+   if(600 / 2 + 60 > this.x){
       return true;
     }
     else{
@@ -37,6 +37,8 @@ var rects = [];
 function setup() {
   createCanvas(640, 360);
   flappybirdgeel = loadImage('images/flappy bird geel.png');
+  bg = loadImage('background flappy bird.png');
+
   
   let randmHeight = random(height / 2);
 
@@ -58,6 +60,9 @@ function setup() {
 function draw() {
   background(127);
   fill(255, 0, 0);
+
+  background(bg);
+
 
   if (frameCount % 60 == 0) {
     console.log(frameCount);
@@ -87,6 +92,7 @@ function draw() {
   }
 
   image(flappybirdgeel, 600 / 2, y, 100, 100);
+
 
     rects.forEach((r) => {
     r.drawRect()
