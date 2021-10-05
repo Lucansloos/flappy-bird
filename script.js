@@ -37,13 +37,13 @@ var rects = [];
 function setup() {
   createCanvas(640, 360);
   flappybirdgeel = loadImage('images/flappy bird geel.png');
-  bg = loadImage('background flappy bird.png');
+  bg = loadImage('images/background flappy bird.png');
 
   
   let randmHeight = random(height / 2);
 
-  rect1 = new Rect(640, 300, 30, randmHeight + 100, -5, "green");
-  rect2 = new Rect(640, 0, 30, randmHeight, -5, "green");
+  rect1 = new Rect(640, 300, 50, randmHeight + 100, -5, "green");
+  rect2 = new Rect(640, 0, 50, randmHeight, -5, "green");
   rects.push(rect1);
   rects.push(rect2);
 
@@ -67,8 +67,8 @@ function draw() {
   if (frameCount % 60 == 0) {
     console.log(frameCount);
      let randmHeight = random(height / 2);
-    let newRectBot = new Rect(640, randmHeight + 100, 30, height - (randmHeight + 100), -5, "green");
-    let newRectTop = new Rect(640, 0, 30, randmHeight, -5, "green");
+    let newRectBot = new Rect(640, randmHeight + 100, 50, height - (randmHeight + 100), -5, "green");
+    let newRectTop = new Rect(640, 0, 50, randmHeight, -5, "green");
     rects.push(newRectBot);
     rects.push(newRectTop);
 
