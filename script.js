@@ -1,8 +1,3 @@
-var y;
-var velocity;
-var acceleration;
-var gravity;
-
 class Rect {
   constructor(x, y, w, h, vx, color) {
     this.x = x;
@@ -32,11 +27,39 @@ class Rect {
   }
 }
 
+class Bird {
+  constructor(y, velocity, gravity) {
+    this.y = y;
+    this.velocity = velocity;
+    this.gravity = gravity;
+    this.flappybirdgeel = loadImage('images/flappy bird geel.png');
+  }
+
+  draw() {
+    image(this.flappybirdgeel, 600 / 2, this.y, 100, 100);
+
+    if (this.y >= 300) {
+      this.y = 300;
+
+      if (this.velocity < 0) {
+        this.y += this.velocity;
+      }
+    }
+    else {
+      this.velocity += this.gravity;
+      this.y += this.velocity;
+    }
+  }
+}
+
 var rects = [];
+var bird;
+
+
 
 function setup() {
   createCanvas(640, 360);
-  flappybirdgeel = loadImage('images/flappy bird geel.png');
+  
   bg = loadImage('images/background flappy bird.png');
 
   
@@ -47,14 +70,7 @@ function setup() {
   rects.push(rect1);
   rects.push(rect2);
 
-
-  y = 100;
-  velocity = 0;
-  acceleration = 0;
-
-  gravity = 0.9;
-
-  acceleration = gravity;
+  bird = new Bird(100, 0, 0.9);
 }
 
 function draw() {
@@ -79,19 +95,10 @@ function draw() {
     }
   }
 
-  if (y >= 300) {
-    y = 300;
 
-    if (velocity < 0) {
-      y += velocity;
-    }
-  }
-  else {
-    velocity += acceleration;
-    y += velocity;
-  }
+  bird.draw();
 
-  image(flappybirdgeel, 600 / 2, y, 100, 100);
+
 
 
     rects.forEach((r) => {
@@ -112,7 +119,7 @@ function draw() {
 
 function keyPressed() {
   if (keyCode === 32) {
-    velocity = -10;
+    bird.velocity = -10;
   }
 }
 
