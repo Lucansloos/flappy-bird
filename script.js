@@ -15,16 +15,6 @@ class Rect {
     this.x = this.x + this.vx;
 
   }
-
-
-  isColliding(){
-   if(600 / 2 + 60 > this.x){
-      return true;
-    }
-    else{
-      return false
-      }
-  }
 }
 
 class Bird {
@@ -101,21 +91,16 @@ function draw() {
 
 
 
-    rects.forEach((r) => {
+  rects.forEach((r) => {
     r.drawRect()
-    if(r.isColliding()){
+    if(checkCollision(600 / 2 + 50, bird.y + 50, 16, r.x, r.y, r.w, r.h)){
       r.color = "red";
     }
-    else{
+    else {
       r.color = "green";
     }
   });
-
 }
-
-  rects.forEach(r => r.drawRect());
-
-
 
 function keyPressed() {
   if (keyCode === 32) {
@@ -123,9 +108,20 @@ function keyPressed() {
   }
 }
 
+function checkCollision(cx, cy, rad, rx, ry, rw, rh) {
+  let testX = cx;
+  let testY = cy;
+  
+  if (cx < rx)         testX = rx;      // test left edge
+  else if (cx > rx+rw) testX = rx+rw;   // right edge
+  if (cy < ry)         testY = ry;      // top edge
+  else if (cy > ry+rh) testY = ry+rh;   // bottom edge
+  
+  let d = dist(cx, cy, testX, testY);
+  
+  if (d <= rad) {
+    return true;
+  }
+  return false;
 
-
-
-
-
-
+}
