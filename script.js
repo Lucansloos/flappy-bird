@@ -44,7 +44,12 @@ class Bird {
 
 var rects = [];
 var bird;
+var jumpSound;
 
+
+function preload(){
+  jumpSound = loadSound('sounds/jump.mp3');
+}
 
 
 function setup() {
@@ -105,6 +110,7 @@ function draw() {
 function keyPressed() {
   if (keyCode === 32) {
     bird.velocity = -10;
+    jumpSound.play();
   }
 }
 
