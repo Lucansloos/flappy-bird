@@ -47,6 +47,7 @@ var bird;
 var jumpSound;
 
 var gameState;
+var score = 0;
 
 
 function preload() {
@@ -58,8 +59,8 @@ function setup() {
   createCanvas(640, 360);
 
   bg = loadImage('images/achtergrond woestijn.png');
-  presstart = loadImage('images/start flappy bird.png')
-  gameover = loadImage('images/game over.png')
+  presstart = loadImage('images/startscherm flappy bird.png')
+  gameover = loadImage('images/startscherm flappy bird.png')
 
   let randmHeight = random(height / 2);
 
@@ -86,6 +87,8 @@ function draw() {
   }
   else if (gameState == 2) {
     gameOver();
+
+    
   }
 }
 
@@ -105,8 +108,11 @@ function keyPressed() {
     if (keyCode === 32) {
       rects.length = 0;
       gameState = 1;
+      score = 0;
     }
   }
+
+
 }
 
 function checkCollision(cx, cy, rad, rx, ry, rw, rh) {
@@ -137,6 +143,16 @@ background(gameover)
 }
 
 function game() {
+
+  
+    if (frameCount % 85 == 0 && rects.length > 1) {
+    score = score + 1;
+  } 
+  fill('white');
+  textSize(25);
+  text('Score:', 50, 35)
+  text(score, 150, 35);
+
   if (frameCount % 60 == 0) {
     console.log(frameCount);
     let randmHeight = random(height / 2);
