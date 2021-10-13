@@ -46,6 +46,8 @@ var rects = [];
 var bird;
 var jumpSound;
 
+var gameState;
+
 
 function preload(){
   jumpSound = loadSound('sounds/jump.mp3');
@@ -66,6 +68,11 @@ function setup() {
   rects.push(rect2);
 
   bird = new Bird(100, 0, 0.9);
+
+  gameState = 0;
+  // Gamestate 0: menu
+  // 1: game
+  // 2: game over;
 }
 
 function draw() {
@@ -74,8 +81,65 @@ function draw() {
 
   background(bg);
 
+  if (gameState == 0) {
+    startMenu();
+  }
+  else if (gameState == 1) {
+    game();
+  }
+  else if (gameState == 2) {
+    gameOver();
+  }
+}
 
-  if (frameCount % 60 == 0) {
+function keyPressed() {
+  if (gameState == 0) {
+    if (keyCode === 32) {
+      gameState = 1;
+    }
+  }
+  else if (gameState == 1) {
+    if (keyCode === 32) {
+      bird.velocity = -10;
+      jumpSound.play();
+    }
+  }
+  else if (gameState == 2) {
+    if (keyCode === 32) {
+      rects.length = 0;
+      gameState = 1;
+    }
+  }
+}
+
+function checkCollision(cx, cy, rad, rx, ry, rw, rh) {
+  let testX = cx;
+  let testY = cy;
+  
+  if (cx < rx)         testX = rx;      // test left edge
+  else if (cx > rx+rw) testX = rx+rw;   // right edge
+  if (cy < ry)         testY = ry;      // top edge
+  else if (cy > ry+rh) testY = ry+rh;   // bottom edge
+  
+  let d = dist(cx, cy, testX, testY);
+  
+  if (d <= rad) {
+    return true;
+  }
+  return false;
+
+}
+
+function startMenu() {
+  text("ABC", 100, 100);
+}
+
+function gameOver() {
+  text("dood", 100, 100);
+}
+
+function game() {
+    if (frameCount % 60 == 0) {
     console.log(frameCount);
      let randmHeight = random(height / 2);
     let newRectBot = new Rect(640, randmHeight + 100, 50, height - (randmHeight + 100), -5, "green");
@@ -99,40 +163,11 @@ function draw() {
   rects.forEach((r) => {
     r.drawRect()
     if(checkCollision(600 / 2 + 50, bird.y + 50, 16, r.x, r.y, r.w, r.h)){
-      restartGame();
-      r.color = "red";
+      gameState = 2;
+      //r.color = "red";
     }
     else {
-      r.color = "green";
+      //r.color = "green";
     }
   });
-}
-
-function restartGame() {
-  rects.length = 0;
-}
-
-function keyPressed() {
-  if (keyCode === 32) {
-    bird.velocity = -10;
-    jumpSound.play();
-  }
-}
-
-function checkCollision(cx, cy, rad, rx, ry, rw, rh) {
-  let testX = cx;
-  let testY = cy;
-  
-  if (cx < rx)         testX = rx;      // test left edge
-  else if (cx > rx+rw) testX = rx+rw;   // right edge
-  if (cy < ry)         testY = ry;      // top edge
-  else if (cy > ry+rh) testY = ry+rh;   // bottom edge
-  
-  let d = dist(cx, cy, testX, testY);
-  
-  if (d <= rad) {
-    return true;
-  }
-  return false;
-
 }
