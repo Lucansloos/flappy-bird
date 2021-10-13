@@ -99,12 +99,17 @@ function draw() {
   rects.forEach((r) => {
     r.drawRect()
     if(checkCollision(600 / 2 + 50, bird.y + 50, 16, r.x, r.y, r.w, r.h)){
+      restartGame();
       r.color = "red";
     }
     else {
       r.color = "green";
     }
   });
+}
+
+function restartGame() {
+  rects.length = 0;
 }
 
 function keyPressed() {
