@@ -60,7 +60,7 @@ function setup() {
 
   bg = loadImage('images/achtergrond woestijn.png');
   presstart = loadImage('images/startscherm flappy bird.png')
-  gameover = loadImage('images/startscherm flappy bird.png')
+  gameover = loadImage('images/play again scherm.png')
 
   let randmHeight = random(height / 2);
 
@@ -145,10 +145,10 @@ background(gameover)
 function game() {
 
   
-    if (frameCount % 85 == 0 && rects.length > 1) {
+    if (frameCount % 85 == 0 && rects.length > 0.5) {
     score = score + 1;
   } 
-  fill('white');
+  fill('black');
   textSize(25);
   text('Score:', 50, 35)
   text(score, 150, 35);
