@@ -10,7 +10,7 @@ class Rect {
 
 
   drawRect() {
-    fill(this.color)
+    fill("#cd6600")
     rect(this.x, this.y, this.w, this.h);
     this.x = this.x + this.vx;
 
@@ -49,23 +49,20 @@ var jumpSound;
 var gameState;
 
 
-function preload(){
+function preload() {
   jumpSound = loadSound('sounds/jump.mp3');
 }
 
 
 function setup() {
   createCanvas(640, 360);
-  
-  bg = loadImage('images/background flappy bird.png');
 
-  
+  bg = loadImage('images/achtergrond woestijn.png');
+  presstart = loadImage('images/start flappy bird.png')
+  gameover = loadImage('images/game over.png')
+
   let randmHeight = random(height / 2);
 
-  rect1 = new Rect(640, 300, 50, randmHeight + 100, -5, "green");
-  rect2 = new Rect(640, 0, 50, randmHeight, -5, "green");
-  rects.push(rect1);
-  rects.push(rect2);
 
   bird = new Bird(100, 0, 0.9);
 
@@ -115,14 +112,14 @@ function keyPressed() {
 function checkCollision(cx, cy, rad, rx, ry, rw, rh) {
   let testX = cx;
   let testY = cy;
-  
-  if (cx < rx)         testX = rx;      // test left edge
-  else if (cx > rx+rw) testX = rx+rw;   // right edge
-  if (cy < ry)         testY = ry;      // top edge
-  else if (cy > ry+rh) testY = ry+rh;   // bottom edge
-  
+
+  if (cx < rx) testX = rx;      // test left edge
+  else if (cx > rx + rw) testX = rx + rw;   // right edge
+  if (cy < ry) testY = ry;      // top edge
+  else if (cy > ry + rh) testY = ry + rh;   // bottom edge
+
   let d = dist(cx, cy, testX, testY);
-  
+
   if (d <= rad) {
     return true;
   }
@@ -131,17 +128,18 @@ function checkCollision(cx, cy, rad, rx, ry, rw, rh) {
 }
 
 function startMenu() {
-  text("ABC", 100, 100);
+  background(presstart)
+
 }
 
 function gameOver() {
-  text("dood", 100, 100);
+background(gameover)
 }
 
 function game() {
-    if (frameCount % 60 == 0) {
+  if (frameCount % 60 == 0) {
     console.log(frameCount);
-     let randmHeight = random(height / 2);
+    let randmHeight = random(height / 2);
     let newRectBot = new Rect(640, randmHeight + 100, 50, height - (randmHeight + 100), -5, "green");
     let newRectTop = new Rect(640, 0, 50, randmHeight, -5, "green");
     rects.push(newRectBot);
@@ -149,8 +147,8 @@ function game() {
 
 
     //console.log(rects.length)
-    if(rects.length > 6){
-      rects.splice(0,2);
+    if (rects.length > 6) {
+      rects.splice(0, 2);
     }
   }
 
@@ -162,7 +160,7 @@ function game() {
 
   rects.forEach((r) => {
     r.drawRect()
-    if(checkCollision(600 / 2 + 50, bird.y + 50, 16, r.x, r.y, r.w, r.h)){
+    if (checkCollision(600 / 2 + 50, bird.y + 50, 16, r.x, r.y, r.w, r.h)) {
       gameState = 2;
       //r.color = "red";
     }
