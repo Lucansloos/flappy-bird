@@ -65,7 +65,7 @@ function setup() {
   let randmHeight = random(height / 2);
 
 
-  bird = new Bird(100, 0, 0.9);
+  bird = new Bird(100, 0, 0.2);
 
   gameState = 0;
 }
@@ -81,12 +81,12 @@ function draw() {
   }
   else if (gameState == 1) {
     game();
-  //    backgroundSong.play();
+//      backgroundSong.play();
 
   }
   else if (gameState == 2) {
     gameOver();
- //  backgroundSong.stop();
+//    backgroundSong.stop();
 
 
     
@@ -101,7 +101,7 @@ function keyPressed() {
   }
   else if (gameState == 1) {
     if (keyCode === 32) {
-      bird.velocity = -10;
+      bird.velocity = -5;
       jumpSound.play();
     }
   }
@@ -146,7 +146,7 @@ background(gameover)
 function game() {
 
   
-    if (frameCount % 85 == 0 && rects.length > 0.5) {
+    if (frameCount % 70 == 0 && rects.length > 0.6) {
     score = score + 1;
   } 
   fill('black');
@@ -154,7 +154,7 @@ function game() {
   text('Score:', 50, 35)
   text(score, 150, 35);
 
-  if (frameCount % 60 == 0) {
+  if (frameCount % 80 == 0) {
     console.log(frameCount);
     let randmHeight = random(height / 2);
     let newRectBot = new Rect(640, randmHeight + 100, 50, height - (randmHeight + 100), -5, "green");
