@@ -1,3 +1,10 @@
+var rects = [];
+var bird;
+var jumpSound;
+var gameState;
+var score = 0;
+
+
 class Rect {
   constructor(x, y, w, h, vx, color) {
     this.x = x;
@@ -42,16 +49,9 @@ class Bird {
   }
 }
 
-var rects = [];
-var bird;
-var jumpSound;
-
-var gameState;
-var score = 0;
-
-
 function preload() {
   jumpSound = loadSound('sounds/jump.mp3');
+//  backgroundSong = loadSound('sounds/background.mp3')
 }
 
 
@@ -68,9 +68,6 @@ function setup() {
   bird = new Bird(100, 0, 0.9);
 
   gameState = 0;
-  // Gamestate 0: menu
-  // 1: game
-  // 2: game over;
 }
 
 function draw() {
@@ -84,9 +81,13 @@ function draw() {
   }
   else if (gameState == 1) {
     game();
+  //    backgroundSong.play();
+
   }
   else if (gameState == 2) {
     gameOver();
+ //  backgroundSong.stop();
+
 
     
   }
@@ -119,10 +120,10 @@ function checkCollision(cx, cy, rad, rx, ry, rw, rh) {
   let testX = cx;
   let testY = cy;
 
-  if (cx < rx) testX = rx;      // test left edge
-  else if (cx > rx + rw) testX = rx + rw;   // right edge
-  if (cy < ry) testY = ry;      // top edge
-  else if (cy > ry + rh) testY = ry + rh;   // bottom edge
+  if (cx < rx) testX = rx;      
+  else if (cx > rx + rw) testX = rx + rw;  
+  if (cy < ry) testY = ry;      
+  else if (cy > ry + rh) testY = ry + rh;   
 
   let d = dist(cx, cy, testX, testY);
 
@@ -160,9 +161,6 @@ function game() {
     let newRectTop = new Rect(640, 0, 50, randmHeight, -5, "green");
     rects.push(newRectBot);
     rects.push(newRectTop);
-
-
-    //console.log(rects.length)
     if (rects.length > 6) {
       rects.splice(0, 2);
     }
@@ -171,17 +169,12 @@ function game() {
 
   bird.draw();
 
-
-
-
   rects.forEach((r) => {
     r.drawRect()
     if (checkCollision(600 / 2 + 50, bird.y + 50, 16, r.x, r.y, r.w, r.h)) {
       gameState = 2;
-      //r.color = "red";
     }
     else {
-      //r.color = "green";
     }
   });
 }
