@@ -3,7 +3,7 @@ var bird;
 var jumpSound;
 var gameState;
 var score = 0;
-
+var highscore;
 
 class Rect {
   constructor(x, y, w, h, vx, color) {
@@ -68,11 +68,13 @@ function setup() {
   bird = new Bird(100, 0, 0.2);
 
   gameState = 0;
+
+  getHighscore();
 }
 
 function draw() {
-  background(127);
-  fill(255, 0, 0);
+//  background(127);
+//  fill(255, 0, 0);
 
   background(bg);
 
@@ -81,12 +83,12 @@ function draw() {
   }
   else if (gameState == 1) {
     game();
-//      backgroundSong.play();
+//       backgroundSong.play();
 
   }
   else if (gameState == 2) {
     gameOver();
-//    backgroundSong.stop();
+//        backgroundSong.stop();
 
 
     
@@ -114,6 +116,14 @@ function keyPressed() {
   }
 
 
+}
+
+function getHighscore() {
+  highscore = getItem("highscore");
+
+  if (highscore === null) {
+    highscore = 0;
+  }
 }
 
 function checkCollision(cx, cy, rad, rx, ry, rw, rh) {
@@ -151,8 +161,8 @@ function game() {
   } 
   fill('black');
   textSize(25);
-  text('Score:', 50, 35)
-  text(score, 150, 35);
+  text('Score:' + score + "Highscore: " + getItem("highscore"), 50, 35)
+  //text(score, 150, 35);
 
   if (frameCount % 80 == 0) {
     console.log(frameCount);
@@ -172,6 +182,11 @@ function game() {
   rects.forEach((r) => {
     r.drawRect()
     if (checkCollision(600 / 2 + 50, bird.y + 50, 16, r.x, r.y, r.w, r.h)) {
+
+      if (score > highscore) {
+        storeItem("highscore", score);
+        getHighscore();
+      }
       gameState = 2;
     }
     else {
