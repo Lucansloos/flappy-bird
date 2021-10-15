@@ -161,7 +161,7 @@ function game() {
   } 
   fill('black');
   textSize(25);
-  text('Score:' + score + "Highscore: " + getItem("highscore"), 50, 35)
+  text('Score:' + score + "\nHighscore: " + getItem("highscore"), 50, 35)
   //text(score, 150, 35);
 
   if (frameCount % 80 == 0) {
