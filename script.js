@@ -1,4 +1,4 @@
- var rects = [];
+var rects = [];
 var bird;
 var jumpSound;
 var gameState;
@@ -14,7 +14,6 @@ class Rect {
     this.vx = vx;
     this.color = color
   }
-
 
   drawRect() {
     fill("#cd6600")
@@ -54,7 +53,6 @@ function preload() {
   backgroundSong = loadSound('sounds/backgroundsong.mp3')
 }
 
-
 function setup() {
   createCanvas(640, 360);
 
@@ -63,7 +61,6 @@ function setup() {
   gameover = loadImage('images/play again scherm.png')
 
   let randmHeight = random(height / 2);
-
 
   bird = new Bird(100, 0, 0.2);
 
@@ -120,7 +117,6 @@ function getHighscore() {
   if (highscore == null) {
     highscore = 0;
   }
-
   return highscore;
 }
 
@@ -144,7 +140,6 @@ function checkCollision(cx, cy, rad, rx, ry, rw, rh) {
 
 function startMenu() {
   background(presstart)
-
 }
 
 function gameOver() {
@@ -153,7 +148,6 @@ background(gameover)
 
 function game() {
 
-  
     if (frameCount % 70 == 0 && rects.length > 0.6) {
     score = score + 1;
   } 
@@ -172,7 +166,6 @@ function game() {
       rects.splice(0, 2);
     }
   }
-
 
   bird.draw();
 
