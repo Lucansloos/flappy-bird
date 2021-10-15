@@ -1,4 +1,4 @@
-var rects = [];
+ var rects = [];
 var bird;
 var jumpSound;
 var gameState;
@@ -51,7 +51,7 @@ class Bird {
 
 function preload() {
   jumpSound = loadSound('sounds/jump.mp3');
-//  backgroundSong = loadSound('sounds/background.mp3')
+  backgroundSong = loadSound('sounds/backgroundsong.mp3')
 }
 
 
@@ -73,8 +73,6 @@ function setup() {
 }
 
 function draw() {
-//  background(127);
-//  fill(255, 0, 0);
 
   background(bg);
 
@@ -83,12 +81,12 @@ function draw() {
   }
   else if (gameState == 1) {
     game();
-//       backgroundSong.play();
 
   }
   else if (gameState == 2) {
     gameOver();
-//        backgroundSong.stop();
+    backgroundSong.stop();
+
 
 
     
@@ -99,6 +97,7 @@ function keyPressed() {
   if (gameState == 0) {
     if (keyCode === 32) {
       gameState = 1;
+      backgroundSong.play();
     }
   }
   else if (gameState == 1) {
@@ -112,18 +111,21 @@ function keyPressed() {
       rects.length = 0;
       gameState = 1;
       score = 0;
+
     }
   }
-
-
 }
 
 function getHighscore() {
   highscore = getItem("highscore");
 
-  if (highscore === null) {
+  print(highscore);
+
+  if (highscore == null) {
     highscore = 0;
   }
+
+  return highscore;
 }
 
 function checkCollision(cx, cy, rad, rx, ry, rw, rh) {
@@ -161,8 +163,7 @@ function game() {
   } 
   fill('black');
   textSize(25);
-  text('Score:' + score + "\nHighscore: " + getItem("highscore"), 50, 35)
-  //text(score, 150, 35);
+  text('Score:' + score + "\nHighscore: " + getHighscore(), 50, 35)
 
   if (frameCount % 80 == 0) {
     console.log(frameCount);
