@@ -84,12 +84,8 @@ function draw() {
 
   }
   else if (gameState == 2) {
-    gameOver();
-    backgroundSong.stop();
-
-
-
-    
+    gameOver();  
+         
   }
 }
 
@@ -111,7 +107,7 @@ function keyPressed() {
       rects.length = 0;
       gameState = 1;
       score = 0;
-
+      backgroundSong.play();
     }
   }
 }
@@ -189,6 +185,7 @@ function game() {
         getHighscore();
       }
       gameState = 2;
+      backgroundSong.stop();
     }
     else {
     }
